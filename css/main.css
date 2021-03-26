@@ -1,0 +1,265 @@
+/* Main */
+html, body {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+
+body {
+	--main-font: 'IBM Plex Sans', sans-serif;
+	--main-spacing: 2.5vh;
+	--main-radius: 1.1vh;
+	--nav-icon-size: 35px;
+	--nav-spacing: 5px;
+	--nav-outer-width: calc(var(--nav-icon-size) + 2 * var(--nav-spacing));
+	--greyed-opacity: 0.3;
+	--option-radius: 5px;
+	--transition: 0.5s;
+	display: flex;
+	font-family: var(--main-font);
+	color: var(--text-color);
+	background: var(--timer-bg);
+	transition: all var(--transition);
+}
+
+input[type="radio"] {display: none;}
+
+
+
+/* Timer */
+.timer-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	font-size: 6.5vh;
+	font-weight: 600;
+	line-height: 1.4;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.timer-container > * {
+	opacity: var(--greyed-opacity);
+	padding: 0 0.5em;
+	transition: all var(--transition);
+}
+
+
+
+/* School hasn't started */
+.school-start {
+	font-size: 0;
+	background: transparent;
+}
+.school-until-start {color: var(--start);}
+
+
+
+/* Periods */
+.period-starts-in,
+.period-until-start,
+.period-has-started {
+	color: var(--start);
+}
+
+.period-ends-in,
+.period-until-end,
+.period-has-ended {
+	color: var(--end);
+}
+
+/* Period hasn't started */
+.period.yet-to-start .period-has-started {display: none;}
+.period.yet-to-start .period-has-ended {display: none;}
+
+/* Period has started */
+.period.started .period-starts-in {display: none;}
+.period.started .period-until-start {display: none;}
+.period.started .period-has-ended {display: none;}
+
+/* Period has ended */
+.period.ended .period-starts-in {display: none;}
+.period.ended .period-until-start {display: none;}
+.period.ended .period-has-started {display: none;}
+.period.ended .period-comma {display: none;}
+.period.ended .period-ends-in {display: none;}
+.period.ended .period-until-end {display: none;}
+
+
+
+/* Between periods */
+.between {
+	font-size: 0;
+	background: transparent;
+}
+
+.between-timer {color: var(--end);}
+
+
+
+/* School has ended */
+.school-end {
+	font-size: 0;
+	color: var(--end);
+	background: transparent;
+}
+
+
+
+/* Current */
+.current {
+	opacity: 1;
+	font-size: 1em;
+	border-radius: var(--main-radius);
+	background: var(--current-bg);
+}
+
+
+
+/* Nav */
+.nav {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	height: 100%;
+	font-size: 3.3vh;
+	padding: var(--nav-spacing);
+	box-shadow: var(--shadow);
+	background: var(--nav-bg);
+	box-sizing: border-box;
+	z-index: 999;
+}
+
+.nav-middle {
+	position: absolute;
+	top: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transform: translateY(-50%);
+}
+
+.nav-option {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: var(--nav-icon-size);
+	width: var(--nav-icon-size);
+	color: var(--nav-icon);
+	border-radius: var(--option-radius);
+	cursor: pointer;
+}
+.nav-option ~ .nav-option {margin-top: var(--nav-spacing);}
+.nav-option:hover {background: var(--nav-option-hover);}
+input:checked + .nav-option {background: var(--nav-option-active);}
+
+
+
+/* Menus */
+.menu {
+	--padding: 2vh;
+	position: absolute;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	width: 35vh;
+	padding: var(--padding);
+	margin-left: var(--nav-outer-width);
+	border-top-right-radius: var(--main-radius);
+	border-bottom-right-radius: var(--main-radius);
+	box-shadow: var(--shadow);
+	background: var(--menu-bg);
+	transform: translateX(calc(-100% - var(--nav-outer-width)));
+	transition: 0.2s all ease-in-out;
+	box-sizing: border-box;
+	z-index: 998;
+}
+
+.menu-show {transform: translateX(0);}
+
+.menu-title {
+	font-size: 3vh;
+	font-weight: 600;
+	font-style: italic;
+}
+.menu-title ~ .menu-title {margin-top: 4vh;}
+
+.menu-option {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 5vh;
+	width: 100%;
+	font-size: 2vh;
+	border-radius: var(--option-radius);
+	background: var(--menu-option);
+	cursor: pointer;
+	box-sizing: border-box;
+}
+.menu-option {margin-top: var(--option-radius);}
+.menu-option:hover {background: var(--menu-option-hover);}
+input:checked + .menu-option {
+	border: 3px solid var(--menu-option-border);
+	background: var(--menu-option-active);
+}
+
+
+
+/* Today Info Menu */
+.today-info-menu {
+	height: auto;
+	width: auto;
+	padding: calc(var(--padding) * 2);
+}
+
+/* Customize Menu */
+.customize-menu {overflow-y: scroll;}
+.scroll-gutter {
+	min-height: var(--padding);
+	width: 100%;
+}
+
+/* Extra Timers Menu */
+.extra-timers-menu {
+	display: flex;
+	flex-direction: column;
+}
+.extra-timer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	border-radius: var(--option-radius);
+	background: var(--menu-option);
+}
+.extra-timer + .extra-timer {margin-top: var(--nav-spacing);}
+.extra-timer-until-end, .extra-timer-end-text {color: var(--end);}
+.extra-timer.yet-to-end .extra-timer-end-text {display: none;}
+.extra-timer.ended .extra-timer-predicate {display: none;}
+.extra-timer.ended .extra-timer-until-end {display: none;}
+
+/* Personal Menu */
+.me-menu {
+	bottom: 0;
+	height: auto;
+	padding: calc(var(--padding) * 2);
+}
+.me-menu span {text-align: center;}
+.me-menu a {
+	color: var(--start);
+	text-decoration: none;
+}
+.me-menu a:hover {text-decoration: underline;}

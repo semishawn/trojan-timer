@@ -1,0 +1,67 @@
+:root {
+	--timer-bg: #111;
+	--text-color: white;
+
+	--start: #9f9;
+	--end: #f99;
+
+	--current-bg: hsl(240, 20%, 20%);
+
+	--nav-bg: hsl(240, 20%, 15%);
+	--nav-icon: hsl(240, 20%, 70%);
+	--nav-option-hover: hsl(240, 20%, 20%);
+	--nav-option-active: hsl(240, 20%, 25%);
+
+	--shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
+
+	--tooltip-bg: hsl(240, 20%, 25%);
+	--tooltip-text: white;
+
+	--menu-bg: #222;
+	--menu-option: #333;
+	--menu-option-hover: #444;
+	--menu-option-active: #555;
+	--menu-option-border: #777;
+}
+
+
+
+#light {
+	--timer-bg: white;
+	--text-color: black;
+
+	--start: #0b0;
+	--end: #d00;
+
+	--current-bg: hsl(240, 20%, 90%);
+
+	--nav-bg: hsl(240, 20%, 80%);
+	--nav-icon: hsl(240, 20%, 50%);
+	--nav-option-hover: hsl(240, 20%, 75%);
+	--nav-option-active: hsl(240, 20%, 70%);
+
+	--shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+
+	--tooltip-bg: hsl(240, 20%, 50%);
+	--tooltip-text: white;
+
+	--menu-bg: #ddd;
+	--menu-option: #ccc;
+	--menu-option-hover: #bbb;
+	--menu-option-active: #eee;
+	--menu-option-border: #fff;
+}
+
+
+
+#high-contrast {
+	--timer-bg: black;
+
+	--start: #0f0;
+	--end: #f00;
+
+	--nav-bg: hsl(240, 100%, 15%);
+	--nav-icon: hsl(240, 100%, 70%);
+	--nav-option-hover: hsl(240, 100%, 20%);
+	--nav-option-active: hsl(240, 100%, 25%);
+}
