@@ -80,7 +80,7 @@ setInterval(function() {
 	else now += arrowOffset;
 
 	//* Edit current time programmatically (DEV PURPOSES ONLY)
-	now -= 8 * 60 * 60; // edit hours
+	now -= 11 * 60 * 60; // edit hours
 	now += 0 * 60; // edit minutes
 
 	// Check if last millisecond time has been established or if it caused a second increase
