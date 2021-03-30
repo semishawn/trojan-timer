@@ -53,12 +53,6 @@ function initialize() {
 		$(this).attr('end', endEpoch);
 	});
 
-	$('.extra-timer').each(function(i) {
-		var endTime = extraTimers[i];
-		var endEpoch = parseInt(endTime.getTime().toString().slice(0, -3));
-		$(this).attr('end', endEpoch);
-	});
-
 	var firstPeriodEndMM = schedule[0].end.split(':')[1];
 	var secondPeriodStartMM = schedule[1].start.split(':')[1];
 	betweenM = secondPeriodStartMM - firstPeriodEndMM;
@@ -86,7 +80,7 @@ setInterval(function() {
 	else now += arrowOffset;
 
 	//* Edit current time programmatically (DEV PURPOSES ONLY)
-	now += 0 * 60 * 60; // edit hours
+	now -= 8 * 60 * 60; // edit hours
 	now += 0 * 60; // edit minutes
 
 	// Check if last millisecond time has been established or if it caused a second increase
@@ -176,7 +170,7 @@ function tiktok() {
 		// Calculate difference in time from now until end of timer
 		var end = $(this).attr('end');
 		var endRemain = end - now;
-		var endD = pad((endRemain / 60 / 60 / 24) % 24);
+		var endD = Math.round(endRemain / 60 / 60 / 24);
 		var endH = pad((endRemain / 60 / 60) % 60);
 		var endM = pad((endRemain / 60) % 60);
 		var endS = pad(endRemain % 60);
@@ -192,11 +186,8 @@ function tiktok() {
 
 //* Keyboard shortcuts (DEV PURPOSES ONLY)
 $(document).keydown(function(e) {
-	if (e.which == 37) {
-		arrowOffset -= 30;
-		tiktok();
-	}
-	if (e.which == 39) arrowOffset += 30;
+	if (e.which == 219) arrowOffset -= 30;
+	if (e.which == 221) arrowOffset += 30;
 	if (e.which == 8) {
 		sessionStorage.clear();
 		localStorage.clear();
