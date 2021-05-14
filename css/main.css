@@ -11,11 +11,9 @@ body {
 	--main-font: 'IBM Plex Sans', sans-serif;
 	--main-spacing: 2.5vh;
 	--main-radius: 1.1vh;
-	--nav-icon-size: 35px;
-	--nav-spacing: 5px;
-	--nav-outer-width: calc(var(--nav-icon-size) + 2 * var(--nav-spacing));
 	--greyed-opacity: 0.3;
-	--option-radius: 5px;
+	--option-border: 0.4vh;
+	--option-radius: 0.6vh;
 	--transition: 0.5s;
 	display: flex;
 	font-family: var(--main-font);
@@ -30,14 +28,16 @@ input[type="radio"] {display: none;}
 
 /* Timer */
 .timer-container {
+	--timer-font-size: 6.5vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	height: 100%;
 	width: 100%;
-	font-size: 6.5vh;
+	font-size: var(--timer-font-size);
 	font-weight: 600;
 	line-height: 1.4;
 	overflow: hidden;
@@ -122,6 +122,13 @@ input[type="radio"] {display: none;}
 
 
 /* Nav */
+.nav-container {
+	--nav-spacing: 0.7vh;
+	--menu-width: 35vh;
+	--menu-padding: 2vh;
+	position: relative;
+}
+
 .nav {
 	position: relative;
 	display: flex;
@@ -130,9 +137,7 @@ input[type="radio"] {display: none;}
 	align-items: center;
 	text-align: center;
 	height: 100%;
-	font-size: 3.3vh;
 	padding: var(--nav-spacing);
-	box-shadow: var(--shadow);
 	background: var(--nav-bg);
 	box-sizing: border-box;
 	z-index: 999;
@@ -149,12 +154,15 @@ input[type="radio"] {display: none;}
 }
 
 .nav-option {
+	--option-dimension: 5vh;
+	--icon-size: 3.3vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: var(--nav-icon-size);
-	width: var(--nav-icon-size);
-	color: var(--nav-icon);
+	height: var(--option-dimension);
+	width: var(--option-dimension);
+	font-size: var(--icon-size);
+	color: var(--nav-icon-bg);
 	border-radius: var(--option-radius);
 	cursor: pointer;
 }
@@ -166,27 +174,24 @@ input:checked + .nav-option {background: var(--nav-option-active);}
 
 /* Menus */
 .menu {
-	--padding: 2vh;
 	position: absolute;
-	left: 0;
+	right: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	height: 100%;
 	width: 35vh;
-	padding: var(--padding);
-	margin-left: var(--nav-outer-width);
+	padding: var(--menu-padding);
 	border-top-right-radius: var(--main-radius);
 	border-bottom-right-radius: var(--main-radius);
-	box-shadow: var(--shadow);
 	background: var(--menu-bg);
-	transform: translateX(calc(-100% - var(--nav-outer-width)));
 	transition: 0.2s all ease-in-out;
+	transform: translateX(0);
 	box-sizing: border-box;
 	z-index: 998;
 }
 
-.menu-show {transform: translateX(0);}
+.menu-show {transform: translateX(100%);}
 
 
 
@@ -199,17 +204,18 @@ input:checked + .nav-option {background: var(--nav-option-active);}
 }
 
 /* Customize Menu */
-.customize-menu {overflow-y: scroll;}
-.scroll-gutter {
-	min-height: var(--padding);
+.customize-menu {overflow-x: scroll;}
+.customize-container {
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 }
+.customize-container + .customize-container {margin-top: 4vh;}
 .menu-title {
-	font-size: 3vh;
-	font-weight: 600;
+	font-size: 2.5vh;
+	font-weight: 500;
 	font-style: italic;
 }
-.menu-title ~ .menu-title {margin-top: 4vh;}
 .menu-option {
 	display: flex;
 	justify-content: center;
@@ -217,17 +223,24 @@ input:checked + .nav-option {background: var(--nav-option-active);}
 	min-height: 5vh;
 	width: 100%;
 	font-size: 2vh;
+	border: var(--option-border) solid var(--option-hover-bg);
 	border-radius: var(--option-radius);
-	background: var(--menu-option);
+	transition: all 0.1s;
 	cursor: pointer;
 	box-sizing: border-box;
 }
 .menu-option {margin-top: var(--option-radius);}
-.menu-option:hover {background: var(--menu-option-hover);}
+.menu-option:hover {background: var(--option-hover-bg);}
 input:checked + .menu-option {
-	border: 3px solid var(--menu-option-border);
-	background: var(--menu-option-active);
+	border-color: var(--option-active-bg);
+	background: var(--option-active-bg);
 }
+.tab-toggle-container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.tab-toggle {width: calc(50% - var(--option-radius) / 2);}
 
 /* Extra Timers Menu */
 .extra-timers-menu {
@@ -239,18 +252,21 @@ input:checked + .menu-option {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	height: 100%;
 	width: 100%;
 	font-size: 2.7vh;
 	font-weight: 500;
+	border: var(--option-border) solid var(--option-hover-bg);
 	border-radius: var(--option-radius);
-	background: var(--menu-option);
 }
 .extra-timer + .extra-timer {margin-top: var(--nav-spacing);}
 .extra-timer-until-end, .extra-timer-end-text {color: var(--end);}
 .extra-timer.yet-to-end .extra-timer-end-text {display: none;}
 .extra-timer.ended .extra-timer-predicate {display: none;}
 .extra-timer.ended .extra-timer-until-end {display: none;}
+
+.holidays-menu {font-size: 2.7vh;}
 
 /* Personal Menu */
 .me-menu {

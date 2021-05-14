@@ -66,7 +66,7 @@ $('input[name="schedule"').change(function() {
 
 // If theme is changed
 $('input[name="theme"]').change(function() {
-	var theme = $(this).attr('id').replace('-theme', '');
+	var theme = $(this).attr('id').replace('theme-', '');
 	localStorage.setItem('theme', theme);
 	initialize();
 	tiktok();
@@ -77,10 +77,11 @@ $('input[name="theme"]').change(function() {
 // Assign divider types to their respective arrays
 var colons = [':', ':', ':', ''];
 var letters = ['d ', 'h ', 'm ', 's'];
+var words = [' days ', ' hours ', ' minutes ', ' seconds']
 
 // If unit divider is changed
-$('input[name="unit-divider"').change(function() {
-	var dividerType = $(this).attr('id').replace('-divider', '');
+$('input[name="divider"').change(function() {
+	var dividerType = $(this).attr('id').replace('divider-', '');
 	localStorage.setItem('dividerType', dividerType);
 	initialize();
 	tiktok();
@@ -90,7 +91,7 @@ $('input[name="unit-divider"').change(function() {
 
 // If tab context is changed
 $('input[name="tab"]').change(function() {
-	var tabContext = $(this).attr('id').replace('-tab', '');
+	var tabContext = $(this).attr('id').replace('tab-', '');
 	localStorage.setItem('tabContext', tabContext);
 	initialize();
 	tiktok();

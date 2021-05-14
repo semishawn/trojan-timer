@@ -1,4 +1,38 @@
 ---
+schedules: [
+	{
+		letter: 'A',
+		name: 'Normal'
+	},
+	{
+		letter: 'B',
+		name: 'Early Dismissal'
+	},
+	{
+		letter: 'C',
+		name: '2-Hour Delay'
+	},
+	{
+		letter: 'D',
+		name: 'E-Learning'
+	},
+	{
+		letter: 'E',
+		name: 'District-Wide Closure'
+	}
+]
+
+themes: [
+	'Default',
+	'Light',
+	'High Contrast'
+]
+
+dividers: [
+	'Colons',
+	'Letters',
+	'Words'
+]
 ---
 
 <!DOCTYPE html>
@@ -20,110 +54,114 @@
 </head>
 
 <body>
-	<div class="menu today-info-menu">
-		<span class="today-date"></span>
-		<span class="today-day">(idk how to calculate day # yet)</span>
-	</div>
-
-	<div class="menu customize-menu">
-		<span class="menu-title">Schedule</span>
-		<input type="radio" name="schedule" id="scheduleA" checked>
-		<label class="menu-option" for="scheduleA">Normal</label>
-		<input type="radio" name="schedule" id="scheduleB">
-		<label class="menu-option" for="scheduleB">Early Dismissal</label>
-		<input type="radio" name="schedule" id="scheduleC">
-		<label class="menu-option" for="scheduleC">2-Hour Delay</label>
-		<input type="radio" name="schedule" id="scheduleD">
-		<label class="menu-option" for="scheduleD">E-Learning</label>
-		<input type="radio" name="schedule" id="scheduleE">
-		<label class="menu-option" for="scheduleE">District-Wide Closure</label>
-
-		<!-- <span class="menu-title">Format</span>
-		<input type="radio" name="format" id="list-format" checked>
-		<label class="menu-option" for="list-format">List</label>
-		<input type="radio" name="format" id="cylinder-format">
-		<label class="menu-option" for="cylinder-format">Cylinder</label>
-		<input type="radio" name="format" id="boxes-format">
-		<label class="menu-option" for="boxes-format">Boxes</label> -->
-
-		<span class="menu-title">Color Theme</span>
-		<input type="radio" name="theme" id="default-theme" checked>
-		<label class="menu-option" for="default-theme">Default</label>
-		<input type="radio" name="theme" id="light-theme">
-		<label class="menu-option" for="light-theme">Light</label>
-		<input type="radio" name="theme" id="high-contrast-theme">
-		<label class="menu-option" for="high-contrast-theme">High Contrast</label>
-
-		<span class="menu-title">Time Unit Divider</span>
-		<input type="radio" name="unit-divider" id="colons-divider" checked>
-		<label class="menu-option" for="colons-divider">Colons</label>
-		<input type="radio" name="unit-divider" id="letters-divider">
-		<label class="menu-option" for="letters-divider">Letters</label>
-
-		<span class="menu-title">Tab Title</span>
-		<input type="radio" name="tab" id="context-tab" checked>
-		<label class="menu-option" for="context-tab">With Period Context</label>
-		<input type="radio" name="tab" id="contextless-tab">
-		<label class="menu-option" for="contextless-tab">Without Period Context</label>
-
-		<div class="scroll-gutter"></div>
-	</div>
-
-	<div class="menu extra-timers-menu">
-		<div class="extra-timer yet-to-end">
-			<span>1st Quarter <span class="extra-timer-predicate">ends in</span></span>
-			<span class="extra-timer-until-end"></span>
-			<span class="extra-timer-end-text">has ended!</span>
-		</div>
-		<div class="extra-timer yet-to-end">
-			<span>2nd Quarter <span class="extra-timer-predicate">ends in</span></span>
-			<span class="extra-timer-until-end"></span>
-			<span class="extra-timer-end-text">has ended!</span>
-		</div>
-		<div class="extra-timer yet-to-end">
-			<span>3rd Quarter <span class="extra-timer-predicate">ends in</span></span>
-			<span class="extra-timer-until-end"></span>
-			<span class="extra-timer-end-text">has ended!</span>
-		</div>
-		<div class="extra-timer yet-to-end">
-			<span>School Year <span class="extra-timer-predicate">ends in</span></span>
-			<span class="extra-timer-until-end"></span>
-			<span class="extra-timer-end-text">has ended!</span>
-		</div>
-		<div class="extra-timer yet-to-end">
-			<span>Midterms <span class="extra-timer-predicate">are in</span></span>
-			<span class="extra-timer-until-end"></span>
-			<span class="extra-timer-end-text">have passed!</span>
-		</div>
-		<div class="extra-timer yet-to-end">
-			<span>Finals <span class="extra-timer-predicate">are in</span></span>
-			<span class="extra-timer-until-end"></span>
-			<span class="extra-timer-end-text">have passed!</span>
-		</div>
-	</div>
-
-	<div class="menu holidays-menu">Coming Soon...</div>
-
-	<div class="menu me-menu">
-		<span>Trojan Timer was made specifically for [REDACTED] High School by Semishawn (that's me).</span>
-		<span>Its repository can be found <a href="https://github.com/semishawn/trojan-timer" target="_blank">here</a>.</span>
-	</div>
-
-	<div class="nav">
-		<input type="radio" name="menu" id="menu-today-info">
-		<label class="nav-option" for="menu-today-info" tooltip="Today Info"><i class="fas fa-cloud-sun"></i></label>
-
-		<div class="nav-middle">
-			<input type="radio" name="menu" id="menu-customize">
-			<label class="nav-option" for="menu-customize" tooltip="Customize"><i class="fas fa-palette"></i></label>
-			<input type="radio" name="menu" id="menu-extra-timers">
-			<label class="nav-option" for="menu-extra-timers" tooltip="Extra Timers"><i class="fas fa-stopwatch"></i></label>
-			<input type="radio" name="menu" id="menu-holidays">
-			<label class="nav-option" for="menu-holidays" tooltip="Holidays"><i class="fas fa-gift"></i></label>
+	<div class="nav-container">
+		<div class="menu today-info-menu">
+			<span class="today-date"></span>
+			<span class="today-day">(idk how to calculate day # yet)</span>
 		</div>
 
-		<input type="radio" name="menu" id="menu-me">
-		<label class="nav-option" for="menu-me" tooltip="What Is This?"><i class="fas fa-question"></i></label>
+		<div class="menu customize-menu">
+			<div class="customize-container">
+				<span class="menu-title">Schedule</span>
+				{%- for schedule in page.schedules %}
+				<input type="radio" name="schedule" id="schedule{{ schedule.letter }}"{% if forloop.first %} checked{% endif %}>
+				<label class="menu-option" for="schedule{{ schedule.letter }}">{{ schedule.name }}</label>
+				{%- endfor %}
+			</div>
+	
+			<!-- <div class="customize-container">
+				<span class="menu-title">Format</span>
+				<input type="radio" name="format" id="list-format" checked>
+				<label class="menu-option" for="list-format">List</label>
+				<input type="radio" name="format" id="cylinder-format">
+				<label class="menu-option" for="cylinder-format">Cylinder</label>
+				<input type="radio" name="format" id="boxes-format">
+				<label class="menu-option" for="boxes-format">Boxes</label>
+			</div> -->
+	
+			<div class="customize-container">
+				<span class="menu-title">Color Theme</span>
+				{%- for theme in page.themes %}
+				<input type="radio" name="theme" id="theme-{{ theme | slugify }}"{% if forloop.first %} checked{% endif %}>
+				<label class="menu-option" for="theme-{{ theme | slugify }}">{{ theme }}</label>
+				{%- endfor %}
+			</div>
+	
+			<div class="customize-container">
+				<span class="menu-title">Time Unit Divider</span>
+				{%- for divider in page.dividers %}
+				<input type="radio" name="divider" id="divider-{{ divider | slugify }}"{% if forloop.first %} checked{% endif %}>
+				<label class="menu-option" for="divider-{{ divider | slugify }}">{{ divider }}</label>
+				{%- endfor %}
+			</div>
+	
+			<div class="customize-container">
+				<span class="menu-title">Tab Title</span>
+				<div class="tab-toggle-container">
+					<input type="radio" name="tab" id="tab-context" checked>
+					<label class="menu-option tab-toggle" for="tab-context">Context</label>
+					<input type="radio" name="tab" id="tab-no-context">
+					<label class="menu-option tab-toggle" for="tab-no-context">No Context</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="menu extra-timers-menu">
+			<div class="extra-timer yet-to-end">
+				<span>1st Quarter <span class="extra-timer-predicate">ends in</span></span>
+				<span class="extra-timer-until-end"></span>
+				<span class="extra-timer-end-text">has ended!</span>
+			</div>
+			<div class="extra-timer yet-to-end">
+				<span>2nd Quarter <span class="extra-timer-predicate">ends in</span></span>
+				<span class="extra-timer-until-end"></span>
+				<span class="extra-timer-end-text">has ended!</span>
+			</div>
+			<div class="extra-timer yet-to-end">
+				<span>3rd Quarter <span class="extra-timer-predicate">ends in</span></span>
+				<span class="extra-timer-until-end"></span>
+				<span class="extra-timer-end-text">has ended!</span>
+			</div>
+			<div class="extra-timer yet-to-end">
+				<span>School Year <span class="extra-timer-predicate">ends in</span></span>
+				<span class="extra-timer-until-end"></span>
+				<span class="extra-timer-end-text">has ended!</span>
+			</div>
+			<div class="extra-timer yet-to-end">
+				<span>Midterms <span class="extra-timer-predicate">are in</span></span>
+				<span class="extra-timer-until-end"></span>
+				<span class="extra-timer-end-text">have passed!</span>
+			</div>
+			<div class="extra-timer yet-to-end">
+				<span>Finals <span class="extra-timer-predicate">are in</span></span>
+				<span class="extra-timer-until-end"></span>
+				<span class="extra-timer-end-text">have passed!</span>
+			</div>
+		</div>
+
+		<div class="menu holidays-menu">Coming Soon...</div>
+
+		<div class="menu me-menu">
+			<span>Trojan Timer was made specifically for [REDACTED] High School by Semishawn (that's me).</span>
+			<span>Its repository can be found <a href="https://github.com/semishawn/trojan-timer" target="_blank">here</a>.</span>
+		</div>
+
+		<div class="nav">
+			<input type="radio" name="menu" id="menu-today-info">
+			<label class="nav-option" for="menu-today-info" tooltip="Today Info"><i class="fas fa-cloud-sun"></i></label>
+	
+			<div class="nav-middle">
+				<input type="radio" name="menu" id="menu-customize">
+				<label class="nav-option" for="menu-customize" tooltip="Customize"><i class="fas fa-palette"></i></label>
+				<input type="radio" name="menu" id="menu-extra-timers">
+				<label class="nav-option" for="menu-extra-timers" tooltip="Extra Timers"><i class="fas fa-stopwatch"></i></label>
+				<input type="radio" name="menu" id="menu-holidays">
+				<label class="nav-option" for="menu-holidays" tooltip="Holidays"><i class="fas fa-gift"></i></label>
+			</div>
+	
+			<input type="radio" name="menu" id="menu-me">
+			<label class="nav-option" for="menu-me" tooltip="What Is This?"><i class="fas fa-question"></i></label>
+		</div>
 	</div>
 
 	<div class="timer-container">

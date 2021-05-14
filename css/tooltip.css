@@ -10,6 +10,7 @@
 	display: none;
 	opacity: 0;
 	font-size: 14px;
+	font-weight: 500;
 	font-style: italic;
 	line-height: 16px;
 	user-select: none;
@@ -31,11 +32,10 @@
 [tooltip]:after {
 	content: attr(tooltip);
 	top: 50%;
-	right: calc(-1 * var(--tooltip-float) - var(--arrow-height));
+	right: calc(-1 * var(--tooltip-float) - var(--arrow-height) + 1px);
 	text-align: center;
 	padding: 8px 10px;
 	border-radius: var(--option-radius);
-	box-shadow: var(--shadow);
 	color: var(--tooltip-text);
 	background: var(--tooltip-bg);
 	transform: translate(100%, -50%);

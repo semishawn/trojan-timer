@@ -16,21 +16,23 @@ function initialize() {
 	// Set theme
 	if (localStorage.getItem('theme') !== null) {
 		$('body').attr('id', localStorage.getItem('theme'));
-		$('input[id="' + localStorage.getItem('theme') + '-theme"]').prop('checked', 'true');
+		$(`input[id="theme-${localStorage.getItem('theme')}"]`).prop('checked', 'true');
 	}
 
 	// Set divider
 	if (localStorage.getItem('dividerType') === null) divider = colons;
 	else {
 		divider = window[localStorage.getItem('dividerType')];
-		$('#' + localStorage.getItem('dividerType') + '-divider').prop('checked', true);
+		$(`#divider-${localStorage.getItem('dividerType')}`).prop('checked', true);
+		if (divider == words) $('.timer-container').css('font-size', '2vw');
+		else $('.timer-container').css('font-size', 'var(--timer-font-size)');
 	}
 
 	// Set tab context
 	if (localStorage.getItem('tabContext') === null) tabContext = 'context';
 	else {
 		tabContext = localStorage.getItem('tabContext');
-		$('#' + localStorage.getItem('tabContext') + '-tab').prop('checked', true);
+		$(`#tab-${localStorage.getItem('tabContext')}`).prop('checked', true);
 	}
 
 	$('.period').each(function(i) {
@@ -65,23 +67,19 @@ initialize();
  * Known as the "engine".
  * Runs every millisecond (actually about every 4 milliseconds because of browser limitations).
  * Triggers tiktok function on every ACCURATE second change.
- * The idea is to maintain accuracy to the millisecond without actually calculating
- * accuracy every single millisecond, then to simply call tiktok function directly
- * on any user changes.
+ * The idea is to maintain accuracy to the millisecond without actually running tiktok function
+ * every millisecond.
  */
 setInterval(function() {
-	// Get current time in milliseconds, convert to seconds
-	now = parseInt(Date.now().toString().slice(0, -3));
-
-	//* Check if arrow keys have been pressed yet (DEV PURPOSES ONLY)
-	//* If no, don't edit current time
-	//* If yes, add arrowed time difference to current time
-	if (typeof arrowOffset == 'undefined') arrowOffset = 0;
-	else now += arrowOffset;
+	/**
+	 * Get current time in milliseconds, convert to seconds, then add one second due to epoch delay.
+	 * The method used below proved fastest and most accurate compared to
+	 * other millisecond-to-second conversions that I've tested.
+	 */
+	now = Math.round(Date.now() / 1000) + 1;
 
 	//* Edit current time programmatically (DEV PURPOSES ONLY)
-	now -= 11 * 60 * 60; // edit hours
-	now += 0 * 60; // edit minutes
+	if (typeof customNowDifference !== 'undefined') now += customNowDifference;
 
 	// Check if last millisecond time has been established or if it caused a second increase
 	// If yes, run tiktok function
@@ -116,7 +114,7 @@ function tiktok() {
 		// Calculate difference in time from now until end of period
 		var end = $(this).attr('end');
 		var endRemain = end - now;
-		var endHH = pad((endRemain / 60 / 60) % 60);
+		var endHH = pad((endRemain / 60 / 60) % 24);
 		var endMM = pad((endRemain / 60) % 60);
 		var endSS = pad(endRemain % 60);
 		var untilEnd = endHH + divider[1] + endMM + divider[2] + endSS + divider[3];
@@ -171,7 +169,7 @@ function tiktok() {
 		var end = $(this).attr('end');
 		var endRemain = end - now;
 		var endD = Math.round(endRemain / 60 / 60 / 24);
-		var endH = pad((endRemain / 60 / 60) % 60);
+		var endH = pad((endRemain / 60 / 60) % 24);
 		var endM = pad((endRemain / 60) % 60);
 		var endS = pad(endRemain % 60);
 		var untilEnd = endD + divider[0] + endH + divider[1] + endM + divider[2] + endS + divider[3];
@@ -186,11 +184,23 @@ function tiktok() {
 
 //* Keyboard shortcuts (DEV PURPOSES ONLY)
 $(document).keydown(function(e) {
-	if (e.which == 219) arrowOffset -= 30;
-	if (e.which == 221) arrowOffset += 30;
-	if (e.which == 8) {
-		sessionStorage.clear();
-		localStorage.clear();
-		location.reload();
+	switch (e.which) {
+		case 190:
+			var customNowInput = prompt('Enter your desired time (24 hour):');
+			if (customNowInput !== null) {
+				var customNowTime = customNowInput.split(':');
+				var customNowHour = customNowTime[0];
+				var customNowMin = customNowTime[1];
+				var customNow = new Date;
+					customNow.setHours(customNowHour, customNowMin, 0);
+					customNow = Math.round(customNow.getTime() / 1000) + 1;
+					customNowDifference = customNow - now;
+			}
+			break;
+		case 8:
+			sessionStorage.clear();
+			localStorage.clear();
+			location.reload();
+			break;
 	}
 });
